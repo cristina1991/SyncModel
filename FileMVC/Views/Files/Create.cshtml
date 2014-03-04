@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Creaza";
+}
+
+<h2>Incarca Fisier</h2>
+
+@using (Html.BeginForm("Upload", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+   <input type ="file" name ="fisier"/>
+   <input type ="submit" name ="Upload"/>      
+}
+
+<div>
+    @Html.ActionLink("Intoarce-te la Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

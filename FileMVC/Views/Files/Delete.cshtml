@@ -1,0 +1,40 @@
+﻿@model FileMVC.Models.Files
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Stergere</h2>
+
+<h3>Sunteti sigur ca doriti sa stergeti?</h3>
+<fieldset>
+    <legend>Files</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FileName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FileName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Data)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Data)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Intoarce-te la Lista", "Index")
+    </p>
+}
