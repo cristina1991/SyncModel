@@ -48,6 +48,7 @@
     <Compile Include="DataContexts\FilesContext.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileMetadata.cs" />
     <Compile Include="Models\LocalPasswordModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterExternalLoginModel.cs" />

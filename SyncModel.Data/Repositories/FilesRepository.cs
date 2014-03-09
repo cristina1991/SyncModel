@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SyncModel.Data.DataContexts;
 using SyncModel.Data.Models;
 
@@ -50,7 +47,9 @@ namespace SyncModel.Data.Repositories
                 
                 if (oldFile != null)
                 {
-                    oldFile.Data = DateTime.Now;
+                    oldFile.Data = file.Data;
+                    oldFile.FileContent = file.FileContent;
+                    oldFile.FileType = file.FileType;                   
                     oldFile.Description = file.Description;
                     oldFile.FileName = file.FileName;
                 }
@@ -75,6 +74,16 @@ namespace SyncModel.Data.Repositories
             {
                 context.Fisiere.Add(file);
                 context.SaveChanges();
+            }
+        }
+
+        public List<FileMetadata> GetFilesMetadataForUserId(int userId)
+        {
+            using (var context = new FilesContext())
+            {
+                return (from file in context.Fisiere
+                    where file.UserId == userId
+                    select new FileMetadata() {Description = file.Description,FileName = file.FileName,FileType = file.FileType,UserId = file.UserId,Id = file.Id,LastDateChanged = file.Data}).ToList();
             }
         }
     }

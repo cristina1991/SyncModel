@@ -97,6 +97,7 @@ namespace SyncModel.Controllers
             {
                 //make sure the edited file has the same user profile assigned to it
                 file.User = _usersRepository.GetUserProfileByName(User.Identity.Name.ToLower());
+                file.Data = DateTime.Now;
                 //save the changes
                 _filesRepository.EditFile(file);        
         
