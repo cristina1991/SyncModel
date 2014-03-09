@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using SyncModel.Data.DataContexts;
 using WebMatrix.WebData;
-using SyncModel.Models;
 
 namespace SyncModel.Filters
 {

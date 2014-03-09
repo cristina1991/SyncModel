@@ -1,33 +1,34 @@
 ﻿using System;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SyncModel.Models;
+using SyncModel.Data.Models;
+using SyncModel.Data.Repositories;
+using File = SyncModel.Data.Models.File;
 
 namespace SyncModel.Controllers
 {
     [Authorize]
     public class FilesController : Controller
     {
-        private FileMVCdb db = new FileMVCdb();
-
+        private readonly FilesRepository _filesRepository = new FilesRepository();
+        private readonly UsersRepository _usersRepository = new UsersRepository();
         //
         // GET: /Files/
 
         public ActionResult Index()
         {
-     
-                UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == User.Identity.Name.ToLower());
-                // Check if user already exists
-                if (user != null)
-                {
-                    return View(db.fisiere.Where<Files>(c => c.UserId==user.UserId).ToList());
-                }
-            
 
-            return View();
+            UserProfile user = _usersRepository.GetUserProfileByName(User.Identity.Name);
+            
+            // Check if user already exists
+            if (user != null)
+            {
+                var usersFiles =_filesRepository.GetFilesForUserProfile(user);
+                return View(usersFiles);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -35,12 +36,14 @@ namespace SyncModel.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Files files = db.fisiere.Find(id);
-            if (files == null)
+            var file = _filesRepository.GetFileById(id);
+
+            if (file == null)
             {
                 return HttpNotFound();
             }
-            return View(files);
+
+            return View(file);
         }
 
         //
@@ -51,34 +54,36 @@ namespace SyncModel.Controllers
             return View();
         }
 
-        //
-        // POST: /Files/Create
+        ////
+        //// POST: /Files/Create
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Files files)
-        {
-            if (ModelState.IsValid)
-            {
-                db.fisiere.Add(files);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(File file)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //       UserProfile user = _usersRepository.GetUserProfileByName(User.Identity.Name);
 
-            return View(files);
-        }
+        //        _filesRepository.Create()
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(files);
+        //}
 
         //
         // GET: /Files/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Files files = db.fisiere.Find(id);
-            if (files == null)
+            var file = _filesRepository.GetFileById(id);
+
+            if (file == null)
             {
                 return HttpNotFound();
             }
-            return View(files);
+            return View(file);
         }
 
         //
@@ -86,15 +91,18 @@ namespace SyncModel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Files files)
+        public ActionResult Edit(File file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(files).State = EntityState.Modified;
-                db.SaveChanges();
+                //make sure the edited file has the same user profile assigned to it
+                file.User = _usersRepository.GetUserProfileByName(User.Identity.Name.ToLower());
+                //save the changes
+                _filesRepository.EditFile(file);        
+        
                 return RedirectToAction("Index");
             }
-            return View(files);
+            return View(file);
         }
 
         //
@@ -102,12 +110,15 @@ namespace SyncModel.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Files files = db.fisiere.Find(id);
-            if (files == null)
+            var file = _filesRepository.GetFileById(id);
+            var userProfile = _usersRepository.GetUserProfileByName(User.Identity.Name.ToLower());
+
+            if (file == null || userProfile == null)
             {
                 return HttpNotFound();
             }
-            return View(files);
+            
+            return View(file);
         }
 
         //
@@ -117,9 +128,19 @@ namespace SyncModel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Files files = db.fisiere.Find(id);
-            db.fisiere.Remove(files);
-            db.SaveChanges();
+            var file = _filesRepository.GetFileById(id);
+            var userProfile = _usersRepository.GetUserProfileByName(User.Identity.Name.ToLower());
+
+            if (file == null || userProfile == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (file.UserId == userProfile.UserId)
+            {
+                _filesRepository.DeleteFile(file);
+            }
+
             return RedirectToAction("Index");
         }
         [HttpPost, ActionName("Upload")]
@@ -128,41 +149,35 @@ namespace SyncModel.Controllers
         {
             if (fisier != null && fisier.ContentLength > 0)
             {
-               
-                Files newFile = new Files();
-                newFile.Data = DateTime.Now;
-                newFile.Description = fisier.FileName;
-                newFile.FileName = fisier.FileName;
-                newFile.FileType = fisier.ContentType;
+                var userProfile = _usersRepository.GetUserProfileByName(User.Identity.Name.ToLower());
+                var newFile = new File
+                {
+                    Data = DateTime.Now,
+                    Description = fisier.FileName,
+                    FileName = fisier.FileName,
+                    FileType = fisier.ContentType,
+                    UserId = userProfile.UserId
+                };
+
                 using (var binaryReader = new BinaryReader(fisier.InputStream))
                 {
                     newFile.FileContent = binaryReader.ReadBytes(fisier.ContentLength);
                 }
-                using (var context = new FileMVCdb())
-                {
-                    var user = context.UserProfiles.First(u => u.UserName == User.Identity.Name);
-                    newFile.User = user;
-                    context.fisiere.Add(newFile);
-                    context.SaveChanges();
-                }
+
+                _filesRepository.InsertFile(newFile);
             }
             return RedirectToAction("Index");
         }
         public ActionResult Download(int id)
         {
-            Files downloadFile = db.fisiere.FirstOrDefault<Files>(f=>f.Id==id);
+            var downloadFile = _filesRepository.GetFileById(id);
+
             if (downloadFile != null)
             {
                 return File(downloadFile.FileContent, System.Net.Mime.MediaTypeNames.Application.Octet, downloadFile.FileName);
             }
-            return View();
-        }
-       
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+            return HttpNotFound();
         }
     }
 }

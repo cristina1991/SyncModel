@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SyncModel.Models
+namespace SyncModel.Data.Models
 {
-    public class Files
+    public class File
     {
         [Key]
         public int Id { get; set; }
@@ -15,7 +15,7 @@ namespace SyncModel.Models
         public byte[] FileContent { get; set; }
 
         public int UserId { get; set; }
-          [ForeignKey("UserId")]
+        [ForeignKey("UserId")]
         public UserProfile User { get; set; }
     }
 }

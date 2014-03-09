@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
-using SyncModel.Models;
+using SyncModel.Data.DataContexts;
+using SyncModel.Data.Models;
 using WebMatrix.WebData;
 
 namespace SyncModel.Controllers
@@ -262,7 +263,7 @@ namespace SyncModel.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (var  db = new FileMVCdb())
+                using (var  db = new FilesContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
