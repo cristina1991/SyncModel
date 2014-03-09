@@ -50,7 +50,7 @@ namespace SyncModel.Data.Repositories
                 
                 if (oldFile != null)
                 {
-                    oldFile.Data = file.Data;
+                    oldFile.Data = DateTime.Now;
                     oldFile.Description = file.Description;
                     oldFile.FileName = file.FileName;
                 }
