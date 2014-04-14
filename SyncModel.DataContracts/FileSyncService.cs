@@ -92,5 +92,18 @@ namespace SyncModel.SyncService
                 UserId = content.UserId
             });
         }
+        public void DeleteFile(FileSyncContent content)
+        {
+            _filesRepository.DeleteFile(new File
+            {
+                Data = content.Data,
+                Description = content.Description,
+                FileContent = content.FileContent,
+                FileName = content.FileName,
+                FileType = content.FileType,
+                Id = content.Id,
+                UserId = content.UserId
+            });
+        }
     }
 }

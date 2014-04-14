@@ -2,46 +2,48 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title - My SyncModel</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css/bootstrap.css")
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Fisiere", "Index", "Files")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                    <nav class="navbar navbar-fixed-top" role="navigation">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="navbar-header">
+                                        <a class="navbar-brand" href="/">SyncModel</a>
+                                    </div>
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li>@Html.ActionLink("Files", "Index", "Files")</li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                <div class="col-md-3">
+                                    @Html.Partial("_LoginPartial")
+                                </div>
+                            </div>
+
+
+    <!--<ul id="menu">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>-->
+</div>
+                        </nav>
         </header>
-        <div id="body">
+        <div id="body" class="container-fluid">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
 
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)

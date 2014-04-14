@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>@User.Identity.Name</h2>
+<h1>Files</h1>
 
-<p>
-    @Html.ActionLink("Incarca Fisier", "Create")
+<p class="pull-right">
+    @Html.ActionLink("Upload a File", "Create")
 </p>
-<table>
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FileName)
@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Editeaza", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalii", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Sterge", "Delete", new { id=item.Id } )  |
-            @Html.ActionLink("Descarca", "Download", new { id=item.Id }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id } )  |
+            @Html.ActionLink("Download", "Download", new { id=item.Id }) 
         </td>
     </tr>
 }

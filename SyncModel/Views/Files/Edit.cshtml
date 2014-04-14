@@ -4,53 +4,52 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Editare</h2>
+<h2>Edit File Details</h2>
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>File</legend>
 
-    <fieldset>
-        <legend>Files</legend>
+                @Html.HiddenFor(model => model.Id)
 
-        @Html.HiddenFor(model => model.Id)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FileName)
+                    @Html.EditorFor(model => model.FileName)
+                    @Html.ValidationMessageFor(model => model.FileName)
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FileName)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Data)
+                    @Html.DisplayFor(model => model.Data)
+                    @Html.ValidationMessageFor(model => model.Data)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description)
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                @Html.HiddenFor(model => model.FileContent)
+                @Html.HiddenFor(model => model.FileType)
+                <p>
+                    <input type="submit" value="Save" />
+                </p>
+            </fieldset>
+        }
+
+
+        <div>
+            @Html.ActionLink("Back to Files", "Index")
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FileName)
-            @Html.ValidationMessageFor(model => model.FileName)
         </div>
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Data)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Data)
-            @Html.ValidationMessageFor(model => model.Data)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-        
-        @Html.HiddenFor(model => model.FileContent)
-        @Html.HiddenFor(model => model.FileType)
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Intoarce-te la Lista", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

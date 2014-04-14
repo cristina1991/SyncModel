@@ -41,7 +41,7 @@ namespace SyncModel.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Nume de utilizator sau parola incorecta.");
+            ModelState.AddModelError("", "The username or password is incorrect");
             return View(model);
         }
 
@@ -128,8 +128,8 @@ namespace SyncModel.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Parola a fost schimbata."
-                : message == ManageMessageId.SetPasswordSuccess ? "Parola a fost setata."
+                message == ManageMessageId.ChangePasswordSuccess ? "The password was changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "The password was set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
@@ -168,7 +168,7 @@ namespace SyncModel.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Parola curenta este incorecta sau poarola noua nu este valida.");
+                        ModelState.AddModelError("", "Incorrect or invalid password");
                     }
                 }
             }
@@ -191,7 +191,7 @@ namespace SyncModel.Controllers
                     }
                     catch (Exception)
                     {
-                        ModelState.AddModelError("", String.Format(" Un utilizator cu acest nume \"{0}\" poate deja sa existe.", User.Identity.Name));
+                        ModelState.AddModelError("", String.Format("The user with this name \"{0}\" may already exist.", User.Identity.Name));
                     }
                 }
             }
@@ -280,7 +280,7 @@ namespace SyncModel.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("UserName", "Nume de utilizator existent.Introduceti un alt nume de utilizator.");
+                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
                     }
                 }
             }

@@ -4,33 +4,27 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalii</h2>
+<h2>Detalis</h2>
 
 <fieldset>
     <legend>Files</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FileName)
-    </div>
-    <div class="display-field">
+    <div class="form-group">
+        <b>@Html.DisplayNameFor(model => model.FileName)</b>
         @Html.DisplayFor(model => model.FileName)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Data)
-    </div>
-    <div class="display-field">
+    <div class="form-group">
+       <b>@Html.DisplayNameFor(model => model.Data)</b>
         @Html.DisplayFor(model => model.Data)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
+    <div class="form-group">
+        <b> @Html.DisplayNameFor(model => model.Description)</b>
         @Html.DisplayFor(model => model.Description)
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Editeaza", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Intoarce-te la Lista", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to Files", "Index")
 </p>

@@ -20,5 +20,8 @@ namespace SyncModel.SyncService
 
         [OperationContract]
         void UploadEditedFile(FileSyncContent content);
+
+        [OperationContract]
+        void DeleteFile(FileSyncContent content);
     }
 }
