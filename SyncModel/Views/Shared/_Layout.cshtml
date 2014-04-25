@@ -7,24 +7,19 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css/bootstrap.min.css")
         @Styles.Render("~/Content/css") 
-        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/modernizr") 
     </head>
     <body>
         <header>
-                    <nav class="navbar navbar-fixed-top" role="navigation">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="navbar-header">
-                                        <a class="navbar-brand" href="/">SyncModel</a>
-                                    </div>
-                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                        <ul class="nav nav-pills nav-justified">
-                                            <li>@Html.ActionLink("Files", "Index", "Files")</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                <div class="col-md-3">
+                    <nav class="navbar" role="navigation">
+                        <div class="container"> 
+                            <div class="row" id ="navigationbar">
+                                <div class="col-md-2">
+                                    
+                                        <a class="navbar-brand" href="/"><img id ="logo" src ="/Images/logo.png">SyncModel</a>
+                                    
+                                </div>
+                                <div class="col-md-5 col-md-offset-5">          
                                     @Html.Partial("_LoginPartial")
                                 </div>
                             </div>
@@ -38,7 +33,7 @@
 </div>
                         </nav>
         </header>
-        <div id="body" class="container-fluid">
+        <div id="body" class="container">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()

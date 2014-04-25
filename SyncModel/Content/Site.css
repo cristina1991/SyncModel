@@ -1,8 +1,20 @@
-﻿.navbar {
+﻿.navbar 
+{
     background-color:#f5f5f5;
     border-bottom: 1px solid #333;
 }
 
-#body{
-    margin-top:60px;
+body
+{
+    background: url('../Images/perforated.png');
+}
+#navigationbar
+{
+    line-height: 3em;
+}
+#logo 
+{
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
 }

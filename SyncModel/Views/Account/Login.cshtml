@@ -9,46 +9,49 @@
 </hgroup>
 
    <div class="row">
-    <div class="col-md-8">
-        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+       <div class="col-md-4">
+           @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+           {
+               @Html.AntiForgeryToken()
+               @Html.ValidationSummary(true)
 
-            <fieldset>
-                <legend>Use a local account to log in.</legend>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName)
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </div>
+               <fieldset>
+                   <legend>Use a local account to log in.</legend>
+                   <div class="form-group">
+                       @Html.LabelFor(m => m.UserName)
+                       @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                       @Html.ValidationMessageFor(m => m.UserName)
+                   </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password)
-                </div>
+                   <div class="form-group">
+                       @Html.LabelFor(m => m.Password)
+                       @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                       @Html.ValidationMessageFor(m => m.Password)
+                   </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-0">
-                        <div class="checkbox" >
-                            <label>
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit">Log in</button>
-            </fieldset>
-            <div class="col-sm-offset-0">
-                <p>
-                    @Html.ActionLink("Register", "Register") if you don't have an account.
-                </p>
-            </div>
-        }
-    </div>
-    <div class="col-md-4">
+                   <div class="form-group">
+                       <div class="col-sm-offset-0">
+                           <div class="checkbox" >
+                               <label>
+                                   @Html.CheckBoxFor(m => m.RememberMe)
+                                   @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                               </label>
+                           </div>
+                       </div>
+                   </div>
+                   <button type="submit" class="btn btn-primary btn-lg">Log In</button>
+               </fieldset>
+               <div class="col-sm-offset-0">
+                   <p>
+                       @Html.ActionLink("Register", "Register") if you don't have an account.
+                   </p>
+               </div>
+           }
+       </div>
+       <div class="col-md-4">
+           <img src="/Images/personal/seekers_login.png">
+       </div>
+    <div class="col-md-4 ">
         @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
     </div>
 </div>
