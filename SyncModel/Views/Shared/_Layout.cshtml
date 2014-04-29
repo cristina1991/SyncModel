@@ -8,39 +8,29 @@
         @Styles.Render("~/Content/css/bootstrap.min.css")
         @Styles.Render("~/Content/css") 
         @Scripts.Render("~/bundles/modernizr") 
+        
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        @Scripts.Render("~/Scripts/bootstrap.min.js")
     </head>
     <body>
-        <header>
-                    <nav class="navbar" role="navigation">
-                        <div class="container"> 
-                            <div class="row" id ="navigationbar">
-                                <div class="col-md-2">
-                                    
-                                        <a class="navbar-brand" href="/"><img id ="logo" src ="/Images/logo.png">SyncModel</a>
-                                    
-                                </div>
-                                <div class="col-md-5 col-md-offset-5">          
-                                    @Html.Partial("_LoginPartial")
-                                </div>
-                            </div>
-
-
-    <!--<ul id="menu">
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>-->
-</div>
-                        </nav>
-        </header>
         <div id="body" class="container">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
+            <div class="row" id="navigationbar">
+                <div class="col-md-2">
 
-        @Scripts.Render("~/bundles/jquery")
+                    <a class="navbar-brand" href="/"><img id="logo" src="/Images/logo.png">SyncModel</a>
+
+                </div>
+                <div class="col-md-5 col-md-offset-5">
+                    @Html.Partial("_LoginPartial")
+                </div>
+                </div>
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
+
         @RenderSection("scripts", required: false)
     </body>
 </html>

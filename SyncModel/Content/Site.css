@@ -6,8 +6,28 @@
 
 body
 {
-    background: url('../Images/perforated.png');
+    background-color: #33B9FF;
 }
+#body {
+    background-color: white;
+    padding: 3em;
+    margin-top: 3em;
+}
+
+.header {
+    font-size: 3em;
+    line-height: 2em;
+    color: #0074A6;
+    text-align: center;
+}
+.header span {
+    color: #A7BDBB;
+}
+
+#carousel-example-generic {
+    margin-top: 2em;
+}
+
 #navigationbar
 {
     line-height: 3em;
