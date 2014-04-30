@@ -253,11 +253,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Images\green_dust_scratch.png" />
     <Content Include="Images\logo.png" />
-    <Content Include="Images\perforated.png" />
     <Content Include="Images\personal\account.png" />
+    <Content Include="Images\personal\files-storage.jpg" />
+    <Content Include="Images\personal\mobilepro.png" />
+    <Content Include="Images\personal\perforated.png" />
     <Content Include="Images\personal\seekers_login.png" />
+    <Content Include="Images\personal\signUp.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
