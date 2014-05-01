@@ -13,9 +13,8 @@ namespace SyncModel.Data.Models
         public string Description { get; set; }
         public string FileType { get; set; }
         public byte[] FileContent { get; set; }
-
+        [ForeignKey("User")]
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public UserProfile User { get; set; }
+        public virtual UserProfile User { get; set; }
     }
 }
