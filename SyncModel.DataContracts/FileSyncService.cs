@@ -55,6 +55,7 @@ namespace SyncModel.SyncService
                 FileName = content.FileName,
                 FileType = content.FileType,
                 UserId = content.UserId
+                
             });
         }
 

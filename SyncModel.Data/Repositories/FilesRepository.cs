@@ -62,7 +62,7 @@ namespace SyncModel.Data.Repositories
         {
             using (var context = new FilesContext())
             {
-                context.Fisiere.Attach(file);
+               
                 context.Fisiere.Remove(file);
                 context.SaveChanges();
             }

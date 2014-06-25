@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SyncModel.Data.Models
 {
@@ -13,7 +13,7 @@ namespace SyncModel.Data.Models
         public string Description { get; set; }
         public string FileType { get; set; }
         public byte[] FileContent { get; set; }
-        [ForeignKey("User")]
+        
         public int UserId { get; set; }
         public virtual UserProfile User { get; set; }
     }
