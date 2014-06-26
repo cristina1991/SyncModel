@@ -43,7 +43,7 @@ namespace SyncModel.Data.Repositories
         {
             using (var context = new FilesContext())
             {
-                var oldFile = context.Fisiere.FirstOrDefault(c => c.Id == file.Id && c.UserId == file.User.UserId);
+                var oldFile = context.Fisiere.FirstOrDefault(c => c.Id == file.Id);
                 
                 if (oldFile != null)
                 {
